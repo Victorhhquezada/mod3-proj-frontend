@@ -12,7 +12,7 @@ export const AppCtxProv = (props) => {
         async function checkSession(){
             try{
                 const {data} = await getUser()
-                console.log("perroo",data.result._id ? "perro":"noooo")
+                //console.log("perroo",data.result._id ? "perro":"noooo")
                 setUser(data.result._id  ?  data.result : null)
             }catch(error){
                 console.log("error context",error)

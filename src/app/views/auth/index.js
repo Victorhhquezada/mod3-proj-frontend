@@ -3,64 +3,81 @@ import {
     Col,
     Typography,
     Form,
-    Input,
     Button,
-    Divider,
-    message
+    Menu,
+    Layout
 } from 'antd'
-//services 
-//useState, useEffect
+
+
 import {ItemForm} from '../../components'
 import {loginWS,signupWS} from '../../services/auth-endpoint'
 import { useContext } from 'react';
+import {Link} from "react-router-dom"
 import {Ctx} from '../../hooks/context'
 const {Title} = Typography
+const { Header, Content, Footer } = Layout;
 
 function Auth ({match,history,location,...restProps}){ 
    
     const {login} = useContext(Ctx)
+    const handleChange = (event) => {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+
     const handleSubmit = async (user) => {
         try{
-            const perrito = match.path === "/signup" ? signupWS : loginWS
-            const {data} = await perrito(user)
+            const camino = match.path === "/signup" ? signupWS : loginWS
+            const {data} = await camino(user)
             if(match.path === "/auth" ){
                 login(data.result)
             }
-            history.push("/profile")
-            console.log("data",data)
+            history.push("/")
+            console.log("data -> ",data)
         }catch(error){
-            console.log("el erro",error.response)
+            console.log("Error -> ",error.response)
         }
     }
     return (
-        <Row gutter={[16,16]}>
+    <Layout>
+        <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+          <div className="logo" />
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+            <Menu.Item key="1"> <Link to="/">Inicio</Link> </Menu.Item>
+            <Menu.Item key="2"><Link to="/burger-create">Crear Hamburguesa</Link></Menu.Item>
+            <Menu.Item key="3"> <Link to="/login">Login</Link> </Menu.Item>
+          </Menu>
+        </Header>
+        <Content className="site-layout" style={{ height:"100vh", padding: '0 50px', marginTop: 64 }}>
+          <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
+
+          <Row gutter={[16,16]}>
             <Col span={24}>
                 <Title>{match.path === "/signup" ? "Signup" : "Login"}</Title>
                 <Form onFinish={handleSubmit}>
-                    <ItemForm name="email"  label="Email"/>
-                    <ItemForm name="password"  label="Password"/>
+                    
+                    
+                    <ItemForm name="username"  label="Username"/>
                     {match.path === "/signup" &&
-                    <ItemForm name="username"  label="Username"/> }
+                    <ItemForm onChange={handleChange} name="email"  label="Email"/>}
+                    <ItemForm onChange={handleChange} name="password"  label="Password"/>
 
-                    {/*match.path === "/signup" ?
-                        <ItemForm name="username"  label="Username"/>
-                        : 'No hay nada'*/ }
+                    {}
 
                     <Button type='primary' block htmlType='submit'>
                         {match.path === "/signup" ? "Signup" : "Login"}
                     </Button>
                 </Form>
             </Col>
-            <Col span={24}>
-                <Divider>Or</Divider>
-            </Col>
-            {/* Signup o login con red social */}
-            <Col span={18} offset={3}>
-                <Button block>
-                    <a href="http://localhost:3001/api/auth/google">Google</a>
-                </Button>
-            </Col>
         </Row>
+
+          </div>
+          
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>BRGR.CLUB ©2021 Created by Víctor Hernández</Footer>
+      </Layout>
+        
     )
 }
 
