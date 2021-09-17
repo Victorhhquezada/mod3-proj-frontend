@@ -32,6 +32,7 @@ function Auth ({match,history,location,...restProps}){
             const {data} = await camino(user)
             if(match.path === "/auth" ){
                 login(data.result)
+                localStorage.setItem("user",JSON.stringify(user))
             }
             history.push("/")
         }catch(error){
