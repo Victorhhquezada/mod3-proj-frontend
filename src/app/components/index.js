@@ -1,1 +1,1 @@
-export {default as ItemForm} from './ItemForm'
+export {default as ItemForm} from './itemForm'
