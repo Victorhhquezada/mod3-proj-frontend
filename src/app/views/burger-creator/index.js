@@ -16,7 +16,7 @@ const { Header, Content, Footer } = Layout;
 
   
 
-function BurgerCreator (history)  {
+function BurgerCreator ()  {
    
 const [burger,setBurger] = useState ({
     burgername: "",
@@ -74,7 +74,6 @@ const [allburgers,setallBurgers]=useState ([])
                 showConfirmButton: true,
                 timer:2000
               })
-              history.push("/")
               
         })
         .catch(error=> console.log("la error",error))
