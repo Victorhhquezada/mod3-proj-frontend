@@ -6,18 +6,15 @@ export const AppCtxProv = (props) => {
 
     const login = (user) => {
         setUser(user)
-        localStorage.setItem("user",JSON.stringify(user))
     }
 
     const logout = () => {setUser(null) 
-        localStorage.removeItem("user")
         logoutWS()}
 
     useEffect(()=>{
         async function checkSession(){
             try{
                 const {data} = await getUser()
-                //console.log("perroo",data.result._id ? "perro":"noooo")
                 setUser(data.result._id  ?  data.result : null)
             }catch(error){
                 console.log("error context",error)
