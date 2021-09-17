@@ -58,10 +58,12 @@ const [allburgers,setallBurgers]=useState ([])
 
     const handleSubmit = (event) =>{
         event.preventDefault()
+        const user = JSON.parse(localStorage.getItem("user"))
         const formData = new FormData();
+        const newBurger = {...burger,_owner: user._id}
 
-    for(let key in burger){
-      formData.append(key, burger[key])
+    for(let key in newBurger){
+      formData.append(key, newBurger[key])
     }
         createBurger(formData)
         .then(response=> {

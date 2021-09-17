@@ -34,7 +34,6 @@ function Auth ({match,history,location,...restProps}){
                 login(data.result)
             }
             history.push("/")
-            console.log("data -> ",data)
         }catch(error){
             console.log("Error -> ",error.response)
         }
