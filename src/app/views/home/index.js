@@ -44,7 +44,7 @@ function Home ()  {
 
     
     return(
-        <Layout>
+        <Layout styles={{height:"90vh"} }>
           <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
             <div className="logo" />
             <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
@@ -55,15 +55,16 @@ function Home ()  {
           </Header>
           <Content className="site-layout" style={{ height:"100vh", padding: '0 50px', marginTop: 64 }}>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 380 }}>
-
-            <h1>
-              ¡Hola Burger Lover!
-            </h1>
-            <p>
-            Te damos la bienvenida a BRGR.CLUB <br/>
-            El lugar donde los burger lovers se encuentran para compartir su pasión. <br/>
-            ¡COMER HAMBURGUESAS!
-             </p>
+            <div className="head" >
+                <h1>
+                  ¡Hola Burger Lover!
+                </h1>
+                <p>
+                Te damos la bienvenida a BRGR.CLUB <br/>
+                El lugar donde los burger lovers se encuentran para compartir su pasión. <br/>
+                ¡COMER HAMBURGUESAS!
+                </p>
+             </div>
               
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             {allburgers.map((burger, index)=>  {
@@ -96,6 +97,7 @@ function Home ()  {
                 <p>Tipo de Hamburguesa: {burger?.category}</p>
                 <p>Precio: {burger?.price}</p>
                 <p>La Carne: <Rate disabled value={burger?.meat} /></p>
+                <p>El Pan: <Rate disabled value={burger?.bread} /></p>
                 <p>El Queso: <Rate disabled value={burger?.cheese} /></p>
                 <p>Los Toppings: <Rate disabled value={burger?.toppings} /></p>
                 <p>Las Papas: <Rate disabled value={burger?.fries} /></p>

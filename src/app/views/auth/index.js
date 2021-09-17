@@ -40,7 +40,7 @@ function Auth ({match,history,location,...restProps}){
         }
     }
     return (
-    <Layout>
+    <Layout styles={{height:"90vh"} }>
         <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
           <div className="logo" />
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
@@ -62,6 +62,11 @@ function Auth ({match,history,location,...restProps}){
                     {match.path === "/signup" &&
                     <ItemForm onChange={handleChange} name="email"  label="Email"/>}
                     <ItemForm onChange={handleChange} name="password"  label="Password"/>
+                    <span> {`${
+                         match.path !== '/signup' ? "¿Aun no" : '¿Ya'
+                     } tienes cuenta? |`}
+                         <Link to={match.path !== "/signup" ? "/signup" :"/login" }>Dale aqui</Link>
+                     </span>
 
                     {}
 

@@ -14,16 +14,9 @@ import {getallBurgers} from "../../services/burger_ws"
 const { Meta } = Card;
 const { Header, Content, Footer } = Layout;
 
-Swal.bindClickHandler({
-    position: 'top-end',
-    icon: 'success',
-    title: 'Your work has been saved',
-    showConfirmButton: false,
-    timer: 1500
-  })
   
 
-function BurgerCreator ()  {
+function BurgerCreator (history)  {
    
 const [burger,setBurger] = useState ({
     burgername: "",
@@ -65,14 +58,23 @@ const [allburgers,setallBurgers]=useState ([])
 
     const handleSubmit = (event) =>{
         event.preventDefault()
-        console.log("hola",burger)
         const formData = new FormData();
 
     for(let key in burger){
       formData.append(key, burger[key])
     }
         createBurger(formData)
-        .then(response=> console.log("la respuesta",response))
+        .then(response=> {
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Gracias por tu reseña',
+                showConfirmButton: true,
+                timer:2000
+              })
+              history.push("/")
+              
+        })
         .catch(error=> console.log("la error",error))
     }
 
@@ -223,7 +225,7 @@ const [allburgers,setallBurgers]=useState ([])
                             <input type="file" name="picture" id="picture" onChange={uploadFile}/>
 
 
-                            <button onClick={handleSubmit, Swal.fire()}>Send</button>
+                            <button onClick={handleSubmit}>Send</button>
                             
                          </div>
             </div>
