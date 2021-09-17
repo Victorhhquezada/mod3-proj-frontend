@@ -9,7 +9,7 @@ import {
 } from 'antd'
 
 
-import {ItemForm} from '../../components'
+import ItemForm from '../../components/ItemForm'
 import {loginWS,signupWS} from '../../services/auth-endpoint'
 import { useContext } from 'react';
 import {Link} from "react-router-dom"
